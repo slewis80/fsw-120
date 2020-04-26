@@ -1,137 +1,165 @@
 import React from 'react';
 import Square from './Square';
 import './App.css';
+import './index.css';
+
+const DEFAULT_COLOR ="white";
 
 class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-        colors: [
-            "white", "white", "white", "white"
-        ]
-    }
-    this.blackOrWhite = this.blackOrWhite.bind(this)
-    this.purple = this.purple.bind(this)
-    this.blueLeft = this.blueLeft.bind(this)
-    this.blueRight = this.blueRight.bind(this)
-    this.random5 = this.random5.bind(this)
-    this.random6 = this.random6.bind(this)
-    this.random7 = this.random7.bind(this)
-    this.random8 = this.random8.bind(this)
-}
+ constructor() {
+   super()
+    this.state = 
+        {
+          square1: {color:DEFAULT_COLOR}, //state for the first square
+          square2: {color:DEFAULT_COLOR}, //state for the second square
+          square3: {color:DEFAULT_COLOR}, //state for the third square
+          square4: {color:DEFAULT_COLOR}, //state for the fourth square
+          button1: {visibility: "visible"},
+          button2: {visibility: "hidden"},
+          button3: {visibility: "hidden"},
+          button4: {visibility: "hidden"},
+          button5: {visibility: "hidden"},
+          button6: {visibility: "hidden"},
+          button7: {visibility: "hidden"},
+          button8: {visibility: "hidden"}
+        };
+      }
+  //event handlers
+  onChangeColorEvent = (event) => {
+    //debugger
+      const currentSquare = 'square'+event.target.id;
+      this.setState((previousState) => {
+          return { ...previousState, [currentSquare]: {color:this.getRandomColor()}};
+    });
+  }
 
-blackOrWhite() {
-  if (this.state.colors[0] == "white") {
-    this.setState({colors: ["black", "black", "black", "black"]});
-    document.querySelector("#b2").style.visibility = "visible"
-  } else if (this.state.colors[0] != "white") {
-    this.setState({colors: ["white", "white", "white", "white"]});
-    document.querySelector("#b2").style.visibility = "visible"
-    }
-}
-purple() {
-  this.setState({colors: ["purple", "purple", this.state.colors[2], this.state.colors[3]]});
-  document.querySelector("#b3").style.visibility = "visible";
-  document.querySelector("#b4").style.visibility = "visible"
-}
-blueLeft() {
-  this.setState({colors: [this.state.colors[0], this.state.colors[1], "blue", this.state.colors[3]]});
-  document.querySelector("#b5").style.visibility = "visible";
-  document.querySelector("#b6").style.visibility = "visible";
-  document.querySelector("#b7").style.visibility = "visible";
-  document.querySelector("#b8").style.visibility = "visible"
-}
-blueRight() {
-  this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "blue"]});
-  document.querySelector("#b5").style.visibility = "visible";
-  document.querySelector("#b6").style.visibility = "visible";
-  document.querySelector("#b7").style.visibility = "visible";
-  document.querySelector("#b8").style.visibility = "visible"
-}
-random5() {
-  let randomColor = Math.random()
-  if (randomColor <= 0.1) {
-    this.setState({colors: ["green", this.state.colors[1], this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor > 0.1 && randomColor < 0.4) {
-    this.setState({colors: ["red", this.state.colors[1], this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.4 && randomColor < 0.6) {
-    this.setState({colors: ["yellow", this.state.colors[1], this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.6 && randomColor < 0.8) {
-    this.setState({colors: ["orange", this.state.colors[1], this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.8) {
-    this.setState({colors: ["gray", this.state.colors[1], this.state.colors[2], this.state.colors[3]]})
+  blue = (event) => {
+      const currentSquare = 'square'+event.target.id;
+      return (
+      this.setState({[currentSquare]: {color: "blue"}}),
+      this.setState({button5: {visibility: "visible"}}),
+      this.setState({button6: {visibility: "visible"}}),
+      this.setState({button7: {visibility: "visible"}}),
+      this.setState({button8: {visibility: "visible"}}))
   }
-}
-random6() {
-  let randomColor = Math.random()
-  if (randomColor <= 0.1) {
-    this.setState({colors: [this.state.colors[0], "green", this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor > 0.1 && randomColor < 0.4) {
-    this.setState({colors: [this.state.colors[0], "red", this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.4 && randomColor < 0.6) {
-    this.setState({colors: [this.state.colors[0], "yellow", this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.6 && randomColor < 0.8) {
-    this.setState({colors: [this.state.colors[0], "orange", this.state.colors[2], this.state.colors[3]]})
-  } else if (randomColor >= 0.8) {
-    this.setState({colors: [this.state.colors[0], "gray", this.state.colors[2], this.state.colors[3]]})
-  }
-}
-random7() {
-  let randomColor = Math.random()
-  if (randomColor <= 0.1) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], "green", this.state.colors[3]]})
-  } else if (randomColor > 0.1 && randomColor < 0.4) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], "red", this.state.colors[3]]})
-  } else if (randomColor >= 0.4 && randomColor < 0.6) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], "yellow", this.state.colors[3]]})
-  } else if (randomColor >= 0.6 && randomColor < 0.8) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], "orange", this.state.colors[3]]})
-  } else if (randomColor >= 0.8) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], "gray", this.state.colors[3]]})
-  }
-}
-random8() {
-  let randomColor = Math.random()
-  if (randomColor <= 0.1) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "green"]})
-  } else if (randomColor > 0.1 && randomColor < 0.4) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "red"]})
-  } else if (randomColor >= 0.4 && randomColor < 0.6) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "yellow"]})
-  } else if (randomColor >= 0.6 && randomColor < 0.8) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "orange"]})
-  } else if (randomColor >= 0.8) {
-    this.setState({colors: [this.state.colors[0], this.state.colors[1], this.state.colors[2], "gray"]})
-  }
-}
 
+
+  blackOrWhite = ()=> {
+    if (this.state.square1.color === "white") {
+      return (
+        this.setState({square1: {color: "black"}}),
+        this.setState({square2: {color: "black"}}),
+        this.setState({square3: {color: "black"}}),
+        this.setState({square4: {color: "black"}}),
+        this.setState({button2: {visibility: "visible"}})
+      )
+    } 
+    if (this.state.square1.color !== "white") {
+      return (
+        this.setState({square1: {color: "white"}}),
+        this.setState({square2: {color: "white"}}),
+        this.setState({square3: {color: "white"}}),
+        this.setState({square4: {color: "white"}}),
+        this.setState({button2: {visibility: "visible"}})
+      )
+    } 
+  }
+
+    purple = () => {
+      return (
+        this.setState({square1: {color: "purple"}}),
+        this.setState({square2: {color: "purple"}}),
+        this.setState({button3: {visibility: "visible"}}),
+        this.setState({button4: {visibility: "visible"}})
+      )      
+    }
+
+  getRandomColor = () => {
+    //debugger
+    let randomColor = Math.random()
+    if (randomColor <= 0.1) {
+        return "green";
+    }
+    if (randomColor > 0.1 && randomColor < 0.4) {
+      return "red";
+    }
+    if (randomColor >= 0.4 && randomColor < 0.6) {
+      return "yellow";
+    }
+    if (randomColor >= 0.6 && randomColor < 0.8) {
+      return "orange";
+    } 
+    if (randomColor >= 0.8) {
+      return "gray";
+    }
+  }
 
   render(){
-  return (
-    <div>
-      <div className="gridContainer">
-        <Square color={this.state.colors[0]}/>
-        <Square color={this.state.colors[1]}/>
+    return (
+      <div>
+        <div className="gridContainer">
+            <Square color={this.state.square1.color}/>
+            <Square color={this.state.square2.color}/>
+        </div>
+        <div className="gridContainer">
+            <Square color={this.state.square3.color}/>
+            <Square color={this.state.square4.color}/>     
+        </div>
+        <div className="gridContainer">
+          <button id="1" 
+            className="button" 
+            style={this.state.button1} 
+            onClick={this.blackOrWhite}>
+              Small Time DJ
+          </button>       
+          <button id="2" 
+            className="button" 
+            style={this.state.button2} 
+            onClick={this.purple}>
+              Party DJ
+          </button>         
+          <button id="3" 
+            className="button" 
+            style={this.state.button3} 
+            onClick={this.blue}>
+              Professional DJ Left
+          </button>
+          <button id="4" 
+            className="button" 
+            style={this.state.button4} 
+            onClick={this.blue}>
+              Professional DJ Right
+          </button>
+        </div>
+        <div className="gridContainer">
+          <button id="1" 
+            className="button" 
+            style={this.state.button5}
+            onClick={this.onChangeColorEvent}>
+              Big Time DJ 1
+          </button>
+          <button id="2" 
+            className="button" 
+            style={this.state.button6} 
+            onClick={this.onChangeColorEvent}>
+              Big Time DJ 2
+          </button>
+          <button id="3" 
+            className="button" 
+            style={this.state.button7} 
+            onClick={this.onChangeColorEvent}>
+              Big Time DJ 3
+          </button>
+          <button id="4" 
+            className="button" 
+            style={this.state.button8} 
+            onClick={this.onChangeColorEvent}>
+              Big Time DJ 4
+          </button>
+        </div>
       </div>
-      <div className="gridContainer">
-        <Square color={this.state.colors[2]}/>
-        <Square color={this.state.colors[3]}/>
-      </div>
-      <div className="gridContainer">
-        <button id="b1" className="button" onClick={this.blackOrWhite} style={{visibility: "visible"}}>Small Time DJ</button>
-        <button id="b2" className="button" onClick={this.purple}>Party DJ</button>
-        <button id="b3" className="button" onClick={this.blueLeft}>Professional DJ Left</button>
-        <button id="b4" className="button" onClick={this.blueRight}>Professional DJ Right</button>
-      </div>
-      <div className="gridContainer">
-        <button id="b5" className="button" onClick={this.random5}>Big Time DJ 1</button>
-        <button id="b6" className="button" onClick={this.random6}>Big Time DJ 2</button>
-        <button id="b7" className="button" onClick={this.random7}>Big Time DJ 3</button>
-        <button id="b8" className="button" onClick={this.random8}>Big Time DJ 4</button>
-      </div>
-    </div>
-  )
+    )
+    }
   }
-}
 
-export default App;
+export default App
