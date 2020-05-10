@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#navbar {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: olive;
+}
+.navLink {
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}
+.mainSection {
+  padding: 25px;
+}
+.aboutImages {
+  max-width: 200px;
+}
+#serviceList {
+  text-align: left;
+}
+.serviceItem {
+  font-weight: bold;
+  font-size: 18px;
+}
+#footer {
+  background-color: olive;
+  padding: 25px;
+}
